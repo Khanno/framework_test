@@ -10,3 +10,23 @@ class RobotoCustomStyle {
     );
   }
 }
+
+class OswaldCustomStyle {
+  style({required BuildContext context, Color? color}) {
+    return GoogleFonts.oswald(
+      color: color ?? Theme.of(context).primaryColor,
+      fontSize: 12.0,
+      fontWeight: FontWeight.w300,
+    );
+  }
+}
+
+class OxygenCustomStyle {
+  style({required BuildContext context, Color? color}) {
+    return GoogleFonts.oxygen(
+      color: color ?? Theme.of(context).primaryColor,
+      fontSize: 18.0,
+      fontWeight: FontWeight.bold,
+    );
+  }
+}

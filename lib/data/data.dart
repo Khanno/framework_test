@@ -63,7 +63,7 @@ List<Map<String, dynamic>> data = [
     'name': 'Smooth Cayenne Pineapple',
     'value': 315,
     'description': 'Yellow-fleshed, cylindrical fruit with high sugar and acid content, is well-adapted to canning and processing; its leaves are without spines',
-    'image': 'assets/images/smooth_cayanne.jpg',
+    'image': 'assets/images/smooth_cayenne.jpg',
   },
   {
     'name': 'Keitt Mango',

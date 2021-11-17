@@ -5,9 +5,15 @@ class CustomTextInputDecoration {
   style({
     required BuildContext context,
     String? label,
+    String? hint,
     Color? labelColor,
+    Widget? suffixIcon,
+    Color? fillColor,
   }) {
     return InputDecoration(
+        fillColor: fillColor,
+        suffixIcon: suffixIcon,
+        hintText: hint,
         label: Text(label ?? '', style: RobotoCustomStyle().style(context: context),),
         errorStyle: RobotoCustomStyle().style(context: context, color: Theme.of(context).colorScheme.onError),
         alignLabelWithHint: true,

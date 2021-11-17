@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:framework_test/pages/home_page/bloc/home_page_bloc.dart';
 import 'package:framework_test/pages/home_page/home_page.dart';
 import 'package:framework_test/pages/login_page/login_page.dart';
 
@@ -20,12 +22,13 @@ void main() {
               onPrimary: Color(0xFF52B69A),
               onSecondary: Color(0xFF76C893),
               onSurface: Color(0xFF99D98C),
-              onBackground: Color(0xFFB5E48C),
+              onBackground: Color(0xFFD9ED92),
               onError: Colors.redAccent,
               brightness: Brightness.light)),
       routes: {
         '/': (_) => LoginPage(),
-        '/homescreen': (_) => HomePage(),
+        '/homescreen': (_) =>
+            BlocProvider(create: (_) => HomePageBloc(), child: HomePage()),
       },
     ),
   );

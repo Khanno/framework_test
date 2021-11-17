@@ -1,5 +1,5 @@
 class HomePageEvents {}
 
-class LoadingHomePageEvent {}
+class LoadingHomePageEvent extends HomePageEvents {}
 
-class SearchProductsHomePageEvent {}
+class SearchProductsHomePageEvent extends HomePageEvents {}

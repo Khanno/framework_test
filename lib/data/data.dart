@@ -72,7 +72,7 @@ List<Map<String, dynamic>> data = [
     'image': 'assets/images/keitt_mango.jpg',
   },
   {
-    'name': 'Irwin mango',
+    'name': 'Irwin Mango',
     'value': 450,
     'description':  'The flesh is yellow and has a mild but sweet flavor and a pleasant aroma. It is fiberless and contains a monoembryonic seed',
     'image': 'assets/images/irwin_mango.jpg',

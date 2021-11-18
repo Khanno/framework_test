@@ -15,6 +15,7 @@ import 'package:framework_test/widgets/text_inputs/custom_text_input.dart';
 
 class HomePage extends StatelessWidget {
   final TextEditingController searchController = TextEditingController();
+  final ScrollController scrollController = ScrollController();
   Timer? _debounce;
 
   @override
@@ -66,11 +67,13 @@ class HomePage extends StatelessWidget {
                 builder: (BuildContext context, ShoppingCartState cartState) {
               return Stack(
                 children: [
-                  IconButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, '/shopping-cart'),
-                    icon: Icon(Icons.shopping_cart),
-                    color: Theme.of(context).colorScheme.onBackground,
+                  Center(
+                    child: IconButton(
+                      onPressed: () =>
+                          Navigator.pushNamed(context, '/shopping-cart'),
+                      icon: Icon(Icons.shopping_cart),
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
                   ),
                   Visibility(
                       visible: cartState.shoppingCart!.isNotEmpty,
@@ -84,7 +87,7 @@ class HomePage extends StatelessWidget {
                             ),
                             width: 20,
                             height: 20,
-                            child: Text('${cartState.shoppingCart!.length}', textAlign: TextAlign.center, style: RobotoCustomStyle().style(context: context),),
+                            child: Text('${cartState.shoppingCart!.length}', textAlign: TextAlign.center, style: RobotoCustomStyle().style(context: context, color: Colors.white),),
                           ))),
                 ],
               );
@@ -104,17 +107,21 @@ class HomePage extends StatelessWidget {
               case HomePageState:
                 return Padding(
                   padding: const EdgeInsets.fromLTRB(45.0, 0, 45.0, 0),
-                  child: ListView.builder(
-                      physics: BouncingScrollPhysics(),
-                      itemCount: state.listOfProducts!.length,
-                      itemBuilder: (BuildContext context, int index) =>
-                          ProductCardWidget(
-                            product: state.listOfProducts![index],
-                            onPressed: () => context
-                                .read<ShoppingCartBloc>()
-                                .add(AddItemToShoppingCart(
-                                    product: state.listOfProducts![index])),
-                          )),
+                  child: Scrollbar(
+                    controller: scrollController,
+                    child: ListView.builder(
+                        controller: scrollController,
+                        physics: BouncingScrollPhysics(),
+                        itemCount: state.listOfProducts!.length,
+                        itemBuilder: (BuildContext context, int index) =>
+                            ProductCardWidget(
+                              product: state.listOfProducts![index],
+                              onPressed: () => context
+                                  .read<ShoppingCartBloc>()
+                                  .add(AddItemToShoppingCart(
+                                      product: state.listOfProducts![index])),
+                            )),
+                  ),
                 );
               default:
                 return Text('Something went wrong');

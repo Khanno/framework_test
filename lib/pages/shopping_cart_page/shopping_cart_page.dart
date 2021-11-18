@@ -10,6 +10,9 @@ import 'package:framework_test/styles/button_styles.dart';
 import 'package:framework_test/styles/text_styles.dart';
 
 class ShoppingCartPage extends StatelessWidget {
+
+  final ScrollController scrollController = ScrollController();
+
   int _totalValue({required List<Product> listOfProducts}) {
     int total = 0;
     if (listOfProducts.isNotEmpty) {
@@ -41,15 +44,19 @@ class ShoppingCartPage extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: ListView.builder(
-                  itemCount: state.shoppingCart!.length,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext _, int index) =>
-                      CartProductCardWidget(
-                    product: state.shoppingCart![index],
-                    onPressed: () => context.read<ShoppingCartBloc>().add(
-                        RemoveItemFromShoppingCart(
-                            product: state.shoppingCart![index])),
+                child: Scrollbar(
+                  controller: scrollController,
+                  child: ListView.builder(
+                    controller: scrollController,
+                    itemCount: state.shoppingCart!.length,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext _, int index) =>
+                        CartProductCardWidget(
+                      product: state.shoppingCart![index],
+                      onPressed: () => context.read<ShoppingCartBloc>().add(
+                          RemoveItemFromShoppingCart(
+                              product: state.shoppingCart![index])),
+                    ),
                   ),
                 ),
               ),

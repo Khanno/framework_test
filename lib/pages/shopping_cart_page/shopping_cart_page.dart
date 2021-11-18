@@ -32,7 +32,9 @@ class ShoppingCartPage extends StatelessWidget {
         ),
       ),
       backgroundColor: Theme.of(context).colorScheme.onSurface,
-      body: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
+      body: BlocConsumer<ShoppingCartBloc, ShoppingCartState>(
+        listener: (BuildContext context, ShoppingCartState state) {
+        },
           builder: (BuildContext context, ShoppingCartState state) {
         return Padding(
           padding: const EdgeInsets.all(15.0),
@@ -53,7 +55,7 @@ class ShoppingCartPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => context.read<ShoppingCartBloc>().add(CreateAndSavePdf()),
                     child: Text('Confirm Purchase', style: OxygenCustomStyle().style(context: context, color: Theme.of(context).colorScheme.onSurface),),
                     style: ElevatedButtonStyle().style(context: context),
                   ),

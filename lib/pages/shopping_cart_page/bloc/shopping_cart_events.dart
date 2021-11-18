@@ -13,3 +13,5 @@ class RemoveItemFromShoppingCart extends ShoppingCartEvent {
 
   RemoveItemFromShoppingCart({required this.product});
 }
+
+class CreateAndSavePdf extends ShoppingCartEvent {}

@@ -68,7 +68,7 @@ class CustomTextInput extends StatelessWidget {
           }
         }
 
-        if (value != null && value.length < 3) {
+        if (value != null && value.length < 3 && !isPassword) {
           return 'This field requires at least 3 characters';
         }
 

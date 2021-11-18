@@ -31,6 +31,7 @@ class LoginPage extends StatelessWidget {
                     height: 15.0,
                   ),
                   CustomTextInput(
+                    prefixIcon: Icon(Icons.person),
                     controller: usernameController,
                     label: 'Username',
                     isRequired: true,
@@ -39,6 +40,7 @@ class LoginPage extends StatelessWidget {
                     height: 30.0,
                   ),
                   CustomTextInput(
+                    prefixIcon: Icon(Icons.lock),
                     controller: passwordController,
                     label: 'Password',
                     keyboardType: TextInputType.number,

@@ -20,22 +20,30 @@ class CartProductCardWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
-                  child: Container(
-                      width: 50, height: 50, child: Image.asset(product.image!, fit: BoxFit.fill,))),
-              SizedBox(width: 15.0,),
-              Text(
-                '${product.name}',
-                style: OswaldCustomStyle().style(context: context, fontSize: 14.0, fontWeight: FontWeight.w600),
-                textAlign: TextAlign.left,
-              ),
-            ],
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Container(
+                        width: 50, height: 50, child: Image.asset(product.image!, fit: BoxFit.fill,))),
+                SizedBox(width: 15.0,),
+                Expanded(
+                  child: Text(
+                    '${product.name}',
+                    style: OswaldCustomStyle().style(context: context, fontSize: 14.0, fontWeight: FontWeight.w600),
+                    textAlign: TextAlign.left,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 'R\$ ${convertCentsToReal(product.value as int)}',

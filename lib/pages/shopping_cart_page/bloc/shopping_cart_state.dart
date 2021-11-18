@@ -17,6 +17,11 @@ class ShoppingCartState {
   }
 }
 
-class CreatingPdfState extends ShoppingCartState {}
+class CreatingPdfState extends ShoppingCartState {
+  final List<Product> shoppingCart;
+  CreatingPdfState({required this.shoppingCart}) : super(shoppingCart: shoppingCart);
+}
 
-class PdfCreatedState extends ShoppingCartState {}
+class PdfCreatedState extends ShoppingCartState {
+  PdfCreatedState() : super(shoppingCart: []);
+}

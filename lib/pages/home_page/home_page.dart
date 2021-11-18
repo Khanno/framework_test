@@ -108,22 +108,19 @@ class HomePage extends StatelessWidget {
               case HomePageState:
                 return Scrollbar(
                   controller: scrollController,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(45.0, 0, 45.0, 0),
-                    child: ListView.builder(
-                        controller: scrollController,
-                        physics: BouncingScrollPhysics(),
-                        itemCount: state.listOfProducts!.length,
-                        itemBuilder: (BuildContext context, int index) =>
-                            ProductCardWidget(
-                              onTap: () => showDialog(context: context, builder: (_) => InformationCardWidget(product: state.listOfProducts![index])),
-                              product: state.listOfProducts![index],
-                              onPressed: () => context
-                                  .read<ShoppingCartBloc>()
-                                  .add(AddItemToShoppingCart(
-                                      product: state.listOfProducts![index])),
-                            )),
-                  ),
+                  child: ListView.builder(
+                      controller: scrollController,
+                      physics: BouncingScrollPhysics(),
+                      itemCount: state.listOfProducts!.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          ProductCardWidget(
+                            onTap: () => showDialog(context: context, builder: (_) => InformationCardWidget(product: state.listOfProducts![index])),
+                            product: state.listOfProducts![index],
+                            onPressed: () => context
+                                .read<ShoppingCartBloc>()
+                                .add(AddItemToShoppingCart(
+                                    product: state.listOfProducts![index])),
+                          )),
                 );
               default:
                 return Text('Something went wrong');

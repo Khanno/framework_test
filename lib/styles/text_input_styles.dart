@@ -12,8 +12,10 @@ class CustomTextInputDecoration {
     Color? borderColor,
     Color? focusBorderColor,
     Color? hintColor,
+    Widget? prefixIcon,
   }) {
     return InputDecoration(
+        prefixIcon: prefixIcon,
         fillColor: fillColor,
         suffixIcon: suffixIcon,
         hintText: hint,

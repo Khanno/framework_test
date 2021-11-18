@@ -18,6 +18,7 @@ class CustomTextInput extends StatelessWidget {
   final Color? hintColor;
   final Color? textInputColor;
   final Color? cursorColor;
+  final Widget? prefixIcon;
 
   CustomTextInput({
     this.label,
@@ -35,6 +36,7 @@ class CustomTextInput extends StatelessWidget {
     this.hintColor,
     this.textInputColor,
     this.cursorColor,
+    this.prefixIcon,
   });
 
   @override
@@ -52,6 +54,7 @@ class CustomTextInput extends StatelessWidget {
         borderColor: borderColor,
         focusBorderColor: focusBorderColor,
         hintColor: hintColor,
+        prefixIcon: prefixIcon,
       ),
       cursorColor: cursorColor,
       keyboardType: keyboardType ?? TextInputType.name,

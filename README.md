@@ -1,16 +1,22 @@
-# framework_test
 
-A new Flutter project.
+<p align='center'><img src='https://www.svgrepo.com/show/10154/shopping-cart-empty-side-view.svg'/></p>
+
+# MobiMarket - A Framework Interview Test
+
+This is a flutter project made for a job interview. 
+The main purpose was to meet the following requirements:
+- Create a login system - You can log with any account that meet the requirements for the text input fields.
+- The client will be able to search for products and choose what he wants to buy.
+- The app must have a shopping cart system, where it will be listed the products selected by the client.
+- The app must have a checkout button, that when pressed a pdf must be generated simulating a receipt.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+The project was build using Flutter 2.5.2 and Dart 2.14.3. So to run it, first assure you have these versions.
+Don't forget to run the following command in the terminal inside the project folder:
 
-A few resources to get you started if this is your first Flutter project:
+```flutter pub get```
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+After that you should be ready to run the app, or build an apk, ipa or bundle.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The packages are using a stable version and will not update by themselves to prevent future bugs and features being broken because of said updates.

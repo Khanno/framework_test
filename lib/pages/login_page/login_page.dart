@@ -27,27 +27,23 @@ class LoginPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SvgPicture.asset('assets/images/shopping_cart.svg', height: 150.0, width: 150.0,),
-                  SizedBox(
-                    height: 15.0,
-                  ),
+                  SizedBox(height: 15.0),
                   CustomTextInput(
+                    prefixIcon: Icon(Icons.person),
                     controller: usernameController,
                     label: 'Username',
                     isRequired: true,
                   ),
-                  SizedBox(
-                    height: 30.0,
-                  ),
+                  SizedBox(height: 30.0,),
                   CustomTextInput(
+                    prefixIcon: Icon(Icons.lock),
                     controller: passwordController,
                     label: 'Password',
                     keyboardType: TextInputType.number,
                     isRequired: true,
                     isPassword: true,
                   ),
-                  SizedBox(
-                    height: 30.0,
-                  ),
+                  SizedBox(height: 30.0,),
                   InkWell(
                     child: ElevatedButton(
                       onPressed:  () {

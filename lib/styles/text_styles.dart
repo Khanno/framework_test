@@ -6,17 +6,17 @@ class RobotoCustomStyle {
     return GoogleFonts.robotoMono(
         color: color ?? Theme.of(context).colorScheme.secondary,
         fontSize: 14.0,
-        fontWeight: FontWeight.w600
+        fontWeight: FontWeight.w600,
     );
   }
 }
 
 class OswaldCustomStyle {
-  style({required BuildContext context, Color? color}) {
+  style({required BuildContext context, Color? color, double? fontSize, FontWeight? fontWeight}) {
     return GoogleFonts.oswald(
       color: color ?? Theme.of(context).primaryColor,
-      fontSize: 12.0,
-      fontWeight: FontWeight.w300,
+      fontSize: fontSize ?? 12.0,
+      fontWeight: fontWeight ?? FontWeight.w300,
     );
   }
 }

@@ -22,10 +22,13 @@ class HomePageBloc extends Bloc<HomePageEvents, HomePageState> {
   }
 
   void _searchProductsToState(SearchProductsHomePageEvent event, Emitter<HomePageState> emit) {
-    List<Product> listOfProducts = [];
-    state.listOfProducts!.forEach((element) {
-      if(element.name!.toLowerCase().contains(event.searchWord)) listOfProducts.add(element);
+    List<Product> searchedList = [];
+    fruits.data.forEach((element) {
+      if(element['name']!.toLowerCase().contains(event.searchWord)) {
+        final Product product = Product.fromMap(product: element);
+        searchedList.add(product);
+      }
     });
-    emit(HomePageState(searchTerm: state.searchTerm, listOfProducts: listOfProducts));
+    emit(HomePageState(searchTerm: state.searchTerm, listOfProducts: searchedList));
   }
 }

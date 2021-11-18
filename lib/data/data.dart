@@ -20,13 +20,13 @@ List<Map<String, dynamic>> data = [
   {
     'name': 'Asian Pear',
     'value': 210,
-    'description': 'The fruit tends to be quite large and fragrant, and when carefully wrapped (it has a tendency to bruise because of its juiciness)',
+    'description': 'The fruit tends to be quite large and fragrant, and when carefully wrapped (it has a tendency to bruise because of its juiciness).',
     'image': 'assets/images/asian_pear.jpg',
   },
   {
     'name': 'European Pear',
     'value': 280,
-    'description': 'It is one of the most important fruits of temperate regions, being the species from which most orchard pear cultivars grown in Europe, North America, and Australia have been developed',
+    'description': 'It is one of the most important fruits of temperate regions, being the species from which most orchard pear cultivars grown in Europe, North America, and Australia have been developed.',
     'image': 'assets/images/european_pear.jpg',
   },
   {
@@ -44,7 +44,7 @@ List<Map<String, dynamic>> data = [
   {
     'name': 'Scarlet Banana',
     'value': 330,
-    'description': 'commonly known as scarlet banana or red-flowering banana, is a species of flowering plant in the banana and plantain family Musaceae, native to tropical China and Vietnam',
+    'description': 'Commonly known as scarlet banana or red-flowering banana, is a species of flowering plant in the banana and plantain family Musaceae, native to tropical China and Vietnam.',
     'image': 'assets/images/scarlet_banana.jpg',
   },
   {
@@ -56,23 +56,23 @@ List<Map<String, dynamic>> data = [
   {
     'name': 'Queen Pineapple',
     'value': 295,
-    'description': 'Queen Pineapple Fruits are Spiny, golden yellow in color and emits pleasant aroma and flavor at the ripen stage',
+    'description': 'Queen Pineapple Fruits are Spiny, golden yellow in color and emits pleasant aroma and flavor at the ripen stage.',
     'image': 'assets/images/queen_pineapple.jpg',
   },
   {
     'name': 'Smooth Cayenne Pineapple',
     'value': 315,
-    'description': 'Yellow-fleshed, cylindrical fruit with high sugar and acid content, is well-adapted to canning and processing; its leaves are without spines',
+    'description': 'Yellow-fleshed, cylindrical fruit with high sugar and acid content, is well-adapted to canning and processing; its leaves are without spines.',
     'image': 'assets/images/smooth_cayenne.jpg',
   },
   {
     'name': 'Keitt Mango',
     'value': 410,
-    'description': 'The flesh has fibers, tangy and sweet, with a monoembryonic seed',
+    'description': 'The flesh has fibers, tangy and sweet, with a monoembryonic seed.',
     'image': 'assets/images/keitt_mango.jpg',
   },
   {
-    'name': 'Irwin mango',
+    'name': 'Irwin Mango',
     'value': 450,
     'description':  'The flesh is yellow and has a mild but sweet flavor and a pleasant aroma. It is fiberless and contains a monoembryonic seed',
     'image': 'assets/images/irwin_mango.jpg',

@@ -4,19 +4,18 @@ import 'package:framework_test/model/product_model.dart';
 import 'package:framework_test/styles/text_styles.dart';
 
 class ProductCardWidget extends StatelessWidget {
-
   final Product product;
   final Function() onPressed;
+  final Function() onTap;
 
-  ProductCardWidget({required this.product, required this.onPressed});
+  ProductCardWidget({required this.product, required this.onPressed, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10.0, top: 10.0),
+      margin: const EdgeInsets.only(bottom: 10.0, top: 10.0, left: 45, right: 45),
       decoration: BoxDecoration(
-          border: Border.all(
-              color: Theme.of(context).colorScheme.primary, width: 2.0),
+          border: Border.all(color: Theme.of(context).colorScheme.primary, width: 2.0),
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(15.0)),
       child: Padding(
@@ -35,27 +34,28 @@ class ProductCardWidget extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              width: 5.0,
-            ),
+            SizedBox(width: 5.0),
             Flexible(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '${product.name}',
-                    style: OxygenCustomStyle().style(context: context),
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    '${product.description}',
-                    style: OswaldCustomStyle().style(context: context),
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
+              child: GestureDetector(
+                onTap: onTap,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${product.name}',
+                      style: OxygenCustomStyle().style(context: context),
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      '${product.description}',
+                      style: OswaldCustomStyle().style(context: context),
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(width: 5.0),

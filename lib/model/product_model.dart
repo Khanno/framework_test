@@ -4,7 +4,12 @@ class Product {
   int? value;
   String? image;
 
-  Product({this.name, this.description, this.value, this.image});
+  Product({
+    this.name,
+    this.description,
+    this.value,
+    this.image,
+  });
 
   Product.fromMap({required Map product}) {
     this.name = product['name'];

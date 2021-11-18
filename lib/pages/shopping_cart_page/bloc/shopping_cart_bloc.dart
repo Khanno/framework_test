@@ -14,10 +14,9 @@ import 'package:pdf/widgets.dart' as pw;
 class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
   ShoppingCartBloc() : super(ShoppingCartState(shoppingCart: [])) {
     on<AddItemToShoppingCart>((event, emit) => _addItemToState(event, emit));
-    on<RemoveItemFromShoppingCart>(
-        (event, emit) => _removeItemFromState(event, emit));
-    on<CreateAndSavePdf>(
-        (event, emit) => _createAndSavePdfToDevice(event, emit));
+    on<RemoveItemFromShoppingCart>((event, emit) => _removeItemFromState(event, emit));
+    on<CreateAndSavePdf>((event, emit) => _createAndSavePdfToDevice(event, emit));
+    on<ResetShoppingCart>((event, emit) => _resetShoppingCartState(event, emit));
   }
 
   void _addItemToState(
@@ -39,7 +38,7 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     String appDocPath = appDocDir.path;
 
-    final pdf = pw.Document();
+    final pdf = pw.Document(title: 'Receipt', pageMode: PdfPageMode.fullscreen);
     final fontData = await rootBundle.load('assets/fonts/open-sans.ttf');
     final ttf = pw.Font.ttf(fontData.buffer.asByteData());
 
@@ -47,31 +46,59 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
 
     if (state.shoppingCart != null && state.shoppingCart!.isNotEmpty) state.shoppingCart!.forEach((item) => total += item.value as int);
 
-    pdf.addPage(pw.Page(
+    emit(CreatingPdfState(shoppingCart: state.shoppingCart!));
+
+    pdf.addPage(pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
-          return pw.Column(children: [
+          return [
+            pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.spaceEvenly,
+              children: [
+                pw.Text('MobiMarket', style: pw.TextStyle(font: ttf, fontSize: 20)),
+                pw.Text('Receipt', style: pw.TextStyle(font: ttf, fontSize: 20)),
+                pw.Text('Value', style: pw.TextStyle(font: ttf, fontSize: 20)),
+              ]
+            ),
+            pw.SizedBox(
+              height: 15.0
+            ),
             pw.ListView.builder(
               itemCount: state.shoppingCart!.length,
               itemBuilder: (pw.Context context, int index) => pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
-                  pw.Text(state.shoppingCart![index].name as String,
-                      style: pw.TextStyle(font: ttf, fontSize: 30)),
+                  pw.Text(
+                      state.shoppingCart![index].name as String,
+                      style: pw.TextStyle(font: ttf, fontSize: 15),
+                  ),
                   pw.Text(
                       'R\$ ${convertCentsToReal(state.shoppingCart![index].value as int)}',
-                      style: pw.TextStyle(font: ttf, fontSize: 30)),
+                      style: pw.TextStyle(font: ttf, fontSize: 15),
+                  ),
                 ],
               ),
             ),
             pw.SizedBox(height: 35.0),
-            pw.Text('Total: R\$ ${convertCentsToReal(total)}',
-                style: pw.TextStyle(font: ttf, fontSize: 30)),
-          ]);
+            pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.end,
+              children: [
+                pw.Text(
+                    'Total: R\$ ${convertCentsToReal(total)}',
+                    style: pw.TextStyle(font: ttf, fontSize: 20),
+                ),
+              ]
+            ),
+          ];
         }));
     String fileName = '$appDocPath/${DateTime.now()}.pdf';
     final File file = File(fileName);
     await file.writeAsBytes(await pdf.save());
     OpenFile.open(fileName);
+    emit(PdfCreatedState());
+  }
+
+  void _resetShoppingCartState(ResetShoppingCart event, Emitter<ShoppingCartState> emit) {
+    emit(ShoppingCartState(shoppingCart: []));
   }
 }

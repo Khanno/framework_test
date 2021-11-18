@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:framework_test/pages/home_page/bloc/home_page_bloc/home_page_bloc.dart';
 import 'package:framework_test/pages/home_page/bloc/home_page_bloc/home_page_events.dart';
 import 'package:framework_test/pages/home_page/bloc/home_page_bloc/home_page_state.dart';
+import 'package:framework_test/pages/home_page/widgets/information_card_widget.dart';
 import 'package:framework_test/pages/shopping_cart_page/bloc/shopping_cart_bloc.dart';
 import 'package:framework_test/pages/shopping_cart_page/bloc/shopping_cart_events.dart';
 import 'package:framework_test/pages/shopping_cart_page/bloc/shopping_cart_state.dart';
@@ -15,6 +16,7 @@ import 'package:framework_test/widgets/text_inputs/custom_text_input.dart';
 
 class HomePage extends StatelessWidget {
   final TextEditingController searchController = TextEditingController();
+  final ScrollController scrollController = ScrollController();
   Timer? _debounce;
 
   @override
@@ -32,8 +34,7 @@ class HomePage extends StatelessWidget {
           suffixIcon: GestureDetector(
             onTap: () {
               if (searchController.text.isNotEmpty) {
-                context.read<HomePageBloc>().add(SearchProductsHomePageEvent(
-                    searchWord: searchController.text));
+                context.read<HomePageBloc>().add(SearchProductsHomePageEvent(searchWord: searchController.text));
               } else {
                 context.read<HomePageBloc>().add(LoadingHomePageEvent());
               }
@@ -51,8 +52,7 @@ class HomePage extends StatelessWidget {
             if (value.isNotEmpty) {
               if (_debounce?.isActive ?? false) _debounce?.cancel();
               _debounce = Timer(const Duration(milliseconds: 500), () {
-                context.read<HomePageBloc>().add(SearchProductsHomePageEvent(
-                    searchWord: searchController.text));
+                context.read<HomePageBloc>().add(SearchProductsHomePageEvent(searchWord: searchController.text));
               });
             } else {
               context.read<HomePageBloc>().add(LoadingHomePageEvent());
@@ -64,19 +64,21 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.only(right: 8.0),
             child: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
                 builder: (BuildContext context, ShoppingCartState cartState) {
-              return Stack(
-                children: [
-                  IconButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, '/shopping-cart'),
-                    icon: Icon(Icons.shopping_cart),
-                    color: Theme.of(context).colorScheme.onBackground,
-                  ),
-                  Visibility(
+                  return Stack(
+                    children: [
+                      Center(
+                        child: IconButton(
+                          onPressed: () =>
+                          Navigator.pushNamed(context, '/shopping-cart'),
+                          icon: Icon(Icons.shopping_cart),
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
+                      ),
+                    Visibility(
                       visible: cartState.shoppingCart!.isNotEmpty,
                       child: Positioned(
-                          top: 2,
-                          left: 25,
+                          top: 8,
+                          right: 1,
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15.0),
@@ -84,8 +86,15 @@ class HomePage extends StatelessWidget {
                             ),
                             width: 20,
                             height: 20,
-                            child: Text('${cartState.shoppingCart!.length}', textAlign: TextAlign.center, style: RobotoCustomStyle().style(context: context),),
-                          ))),
+                            child: Text(
+                              '${cartState.shoppingCart!.length}',
+                              textAlign: TextAlign.center,
+                              style: RobotoCustomStyle().style(context: context, color: Colors.white,
+                              ),
+                            ),
+                          ),
+                      ),
+                    ),
                 ],
               );
             }),
@@ -98,22 +107,19 @@ class HomePage extends StatelessWidget {
           builder: (BuildContext context, HomePageState state) {
             switch (state.runtimeType) {
               case HomePageLoadingState:
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
+                return const Center(child: CircularProgressIndicator());
               case HomePageState:
-                return Padding(
-                  padding: const EdgeInsets.fromLTRB(45.0, 0, 45.0, 0),
+                return Scrollbar(
+                  controller: scrollController,
                   child: ListView.builder(
+                      controller: scrollController,
                       physics: BouncingScrollPhysics(),
                       itemCount: state.listOfProducts!.length,
                       itemBuilder: (BuildContext context, int index) =>
                           ProductCardWidget(
+                            onTap: () => showDialog(context: context, builder: (_) => InformationCardWidget(product: state.listOfProducts![index])),
                             product: state.listOfProducts![index],
-                            onPressed: () => context
-                                .read<ShoppingCartBloc>()
-                                .add(AddItemToShoppingCart(
-                                    product: state.listOfProducts![index])),
+                            onPressed: () => context.read<ShoppingCartBloc>().add(AddItemToShoppingCart(product: state.listOfProducts![index])),
                           )),
                 );
               default:

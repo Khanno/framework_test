@@ -55,7 +55,14 @@ class LoginPage extends StatelessWidget {
                           Navigator.pushReplacementNamed(context, '/homescreen');
                         }
                       },
-                      child: Text('Log in', style: RobotoCustomStyle().style(context: context, color: Colors.white),),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('Login', style: RobotoCustomStyle().style(context: context, color: Colors.white),),
+                          SizedBox(width: 5.0,),
+                          Icon(Icons.login, color: Colors.white,),
+                        ],
+                      ),
                       style: ElevatedButtonStyle().style(context: context),
                     ),
                   ),

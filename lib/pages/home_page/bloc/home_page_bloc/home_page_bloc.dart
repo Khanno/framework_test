@@ -1,12 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:framework_test/model/product_model.dart';
-import 'package:framework_test/pages/home_page/bloc/home_page_events.dart';
-import 'package:framework_test/pages/home_page/bloc/home_page_state.dart';
+import 'package:framework_test/pages/home_page/bloc/home_page_bloc/home_page_events.dart';
+import 'package:framework_test/pages/home_page/bloc/home_page_bloc/home_page_state.dart';
 import 'package:framework_test/data/data.dart' as fruits;
 
 class HomePageBloc extends Bloc<HomePageEvents, HomePageState> {
   HomePageBloc() : super(HomePageLoadingState()){
     on<LoadingHomePageEvent>((event, emit) => _loadHomePageToState(event, emit));
+    on<SearchProductsHomePageEvent>((event, emit) => _searchProductsToState(event, emit));
     add(LoadingHomePageEvent());
   }
 
@@ -18,5 +19,13 @@ class HomePageBloc extends Bloc<HomePageEvents, HomePageState> {
       listOfProducts.add(product);
     });
     emit(HomePageState(listOfProducts: listOfProducts));
+  }
+
+  void _searchProductsToState(SearchProductsHomePageEvent event, Emitter<HomePageState> emit) {
+    List<Product> listOfProducts = [];
+    state.listOfProducts!.forEach((element) {
+      if(element.name!.toLowerCase().contains(event.searchWord)) listOfProducts.add(element);
+    });
+    emit(HomePageState(searchTerm: state.searchTerm, listOfProducts: listOfProducts));
   }
 }

@@ -10,7 +10,6 @@ import 'package:framework_test/styles/button_styles.dart';
 import 'package:framework_test/styles/text_styles.dart';
 
 class ShoppingCartPage extends StatelessWidget {
-
   final ScrollController scrollController = ScrollController();
 
   int _totalValue({required List<Product> listOfProducts}) {
@@ -27,63 +26,109 @@ class ShoppingCartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Shopping Cart', style: OxygenCustomStyle().style(context: context, color: Theme.of(context).colorScheme.onSurface),),
+        title: Text(
+          'Shopping Cart',
+          style: OxygenCustomStyle().style(
+              context: context, color: Theme.of(context).colorScheme.onSurface),
+        ),
         centerTitle: true,
         leading: Padding(
           padding: const EdgeInsets.only(left: 15.0),
-          child: IconButton(onPressed: () => Navigator.pop(context), icon: Icon(Icons.arrow_back_ios),),
+          child: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(Icons.arrow_back_ios),
+          ),
         ),
       ),
       backgroundColor: Theme.of(context).colorScheme.onSurface,
-      body: BlocConsumer<ShoppingCartBloc, ShoppingCartState>(
-        listener: (BuildContext context, ShoppingCartState state) {
-        },
+      body: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
           builder: (BuildContext context, ShoppingCartState state) {
-        return Scrollbar(
-          controller: scrollController,
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    controller: scrollController,
-                    itemCount: state.shoppingCart!.length,
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext _, int index) =>
-                        CartProductCardWidget(
-                      product: state.shoppingCart![index],
-                      onPressed: () => context.read<ShoppingCartBloc>().add(
-                          RemoveItemFromShoppingCart(
-                              product: state.shoppingCart![index])),
-                    ),
-                  ),
-                ),
-                Column(
+            switch (state.runtimeType) {
+              case CreatingPdfState:
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              case PdfCreatedState:
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    Center(
+                      child: Text('Receipt created'),
+                    ),
+                    ElevatedButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: Row(
+                          children: [
+                            Text('Return to home page'),
+                            SizedBox(width: 15.0,),
+                            Icon(Icons.keyboard_return),
+                          ],
+                        ))
+                  ],
+                );
+              case ShoppingCartPage:
+                return Scrollbar(
+                  controller: scrollController,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
                       children: [
-                        ElevatedButton(
-                          onPressed: () => context.read<ShoppingCartBloc>().add(CreateAndSavePdf()),
-                          child: Text('Confirm Purchase', style: OxygenCustomStyle().style(context: context, color: Theme.of(context).colorScheme.onSurface),),
-                          style: ElevatedButtonStyle().style(context: context),
+                        Expanded(
+                          child: ListView.builder(
+                            controller: scrollController,
+                            itemCount: state.shoppingCart!.length,
+                            shrinkWrap: true,
+                            itemBuilder: (BuildContext _, int index) =>
+                                CartProductCardWidget(
+                              product: state.shoppingCart![index],
+                              onPressed: () => context
+                                  .read<ShoppingCartBloc>()
+                                  .add(RemoveItemFromShoppingCart(
+                                      product: state.shoppingCart![index])),
+                            ),
+                          ),
                         ),
-                        Text(
-                          'Total: R\$ ${convertCentsToReal(_totalValue(listOfProducts: state.shoppingCart!))}',
-                          style: OxygenCustomStyle().style(
-                              context: context,
-                              color: Theme.of(context).colorScheme.primary),
-                        ),
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () => context
+                                      .read<ShoppingCartBloc>()
+                                      .add(CreateAndSavePdf()),
+                                  child: Text(
+                                    'Confirm Purchase',
+                                    style: OxygenCustomStyle().style(
+                                        context: context,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface),
+                                  ),
+                                  style: ElevatedButtonStyle()
+                                      .style(context: context),
+                                ),
+                                Text(
+                                  'Total: R\$ ${convertCentsToReal(_totalValue(listOfProducts: state.shoppingCart!))}',
+                                  style: OxygenCustomStyle().style(
+                                      context: context,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
                       ],
                     ),
-                  ],
-                )
-              ],
-            ),
-          ),
-        );
-      }),
+                  ),
+                );
+              default:
+                return Text('Something went wrong.');
+            }
+          }),
     );
   }
 }

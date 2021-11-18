@@ -17,4 +17,6 @@ class ShoppingCartState {
   }
 }
 
+class CreatingPdfState extends ShoppingCartState {}
+
 class PdfCreatedState extends ShoppingCartState {}

@@ -47,6 +47,8 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
 
     if (state.shoppingCart != null && state.shoppingCart!.isNotEmpty) state.shoppingCart!.forEach((item) => total += item.value as int);
 
+    emit(CreatingPdfState());
+
     pdf.addPage(pw.Page(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {

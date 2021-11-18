@@ -51,22 +51,33 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
           return pw.Column(children: [
+            pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+              children: [
+                pw.Text('MobiMarket', style: pw.TextStyle(font: ttf, fontSize: 20)),
+                pw.Text('Receipt', style: pw.TextStyle(font: ttf, fontSize: 20)),
+                pw.Text('Value', style: pw.TextStyle(font: ttf, fontSize: 20)),
+              ]
+            ),
+            pw.SizedBox(
+              height: 15.0
+            ),
             pw.ListView.builder(
               itemCount: state.shoppingCart!.length,
               itemBuilder: (pw.Context context, int index) => pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
                   pw.Text(state.shoppingCart![index].name as String,
-                      style: pw.TextStyle(font: ttf, fontSize: 30)),
+                      style: pw.TextStyle(font: ttf, fontSize: 15)),
                   pw.Text(
                       'R\$ ${convertCentsToReal(state.shoppingCart![index].value as int)}',
-                      style: pw.TextStyle(font: ttf, fontSize: 30)),
+                      style: pw.TextStyle(font: ttf, fontSize: 15)),
                 ],
               ),
             ),
             pw.SizedBox(height: 35.0),
             pw.Text('Total: R\$ ${convertCentsToReal(total)}',
-                style: pw.TextStyle(font: ttf, fontSize: 30)),
+                style: pw.TextStyle(font: ttf, fontSize: 20)),
           ]);
         }));
     String fileName = '$appDocPath/${DateTime.now()}.pdf';

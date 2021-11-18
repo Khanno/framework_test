@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:framework_test/pages/home_page/bloc/home_page_bloc/home_page_bloc.dart';
 import 'package:framework_test/pages/home_page/bloc/home_page_bloc/home_page_events.dart';
 import 'package:framework_test/pages/home_page/bloc/home_page_bloc/home_page_state.dart';
+import 'package:framework_test/pages/home_page/widgets/information_card_widget.dart';
 import 'package:framework_test/pages/shopping_cart_page/bloc/shopping_cart_bloc.dart';
 import 'package:framework_test/pages/shopping_cart_page/bloc/shopping_cart_events.dart';
 import 'package:framework_test/pages/shopping_cart_page/bloc/shopping_cart_state.dart';
@@ -78,8 +79,8 @@ class HomePage extends StatelessWidget {
                   Visibility(
                       visible: cartState.shoppingCart!.isNotEmpty,
                       child: Positioned(
-                          top: 2,
-                          left: 25,
+                          top: 8,
+                          right: 1,
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15.0),
@@ -105,16 +106,17 @@ class HomePage extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               case HomePageState:
-                return Padding(
-                  padding: const EdgeInsets.fromLTRB(45.0, 0, 45.0, 0),
-                  child: Scrollbar(
-                    controller: scrollController,
+                return Scrollbar(
+                  controller: scrollController,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(45.0, 0, 45.0, 0),
                     child: ListView.builder(
                         controller: scrollController,
                         physics: BouncingScrollPhysics(),
                         itemCount: state.listOfProducts!.length,
                         itemBuilder: (BuildContext context, int index) =>
                             ProductCardWidget(
+                              onTap: () => showDialog(context: context, builder: (_) => InformationCardWidget(product: state.listOfProducts![index])),
                               product: state.listOfProducts![index],
                               onPressed: () => context
                                   .read<ShoppingCartBloc>()

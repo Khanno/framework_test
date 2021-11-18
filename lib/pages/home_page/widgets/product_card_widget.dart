@@ -4,11 +4,12 @@ import 'package:framework_test/model/product_model.dart';
 import 'package:framework_test/styles/text_styles.dart';
 
 class ProductCardWidget extends StatelessWidget {
-
   final Product product;
   final Function() onPressed;
+  final Function() onTap;
 
-  ProductCardWidget({required this.product, required this.onPressed});
+  ProductCardWidget(
+      {required this.product, required this.onPressed, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -39,23 +40,26 @@ class ProductCardWidget extends StatelessWidget {
               width: 5.0,
             ),
             Flexible(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '${product.name}',
-                    style: OxygenCustomStyle().style(context: context),
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    '${product.description}',
-                    style: OswaldCustomStyle().style(context: context),
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
+              child: GestureDetector(
+                onTap: onTap,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${product.name}',
+                      style: OxygenCustomStyle().style(context: context),
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      '${product.description}',
+                      style: OswaldCustomStyle().style(context: context),
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(width: 5.0),
@@ -72,7 +76,8 @@ class ProductCardWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: CircleAvatar(
-                      backgroundColor: Theme.of(context).colorScheme.onBackground,
+                      backgroundColor:
+                          Theme.of(context).colorScheme.onBackground,
                       child: IconButton(
                         onPressed: onPressed,
                         icon: const Icon(Icons.add),

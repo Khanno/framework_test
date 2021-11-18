@@ -67,7 +67,7 @@ class ShoppingCartPage extends StatelessWidget {
                         ))
                   ],
                 );
-              case ShoppingCartPage:
+              case ShoppingCartState:
                 return Scrollbar(
                   controller: scrollController,
                   child: Padding(

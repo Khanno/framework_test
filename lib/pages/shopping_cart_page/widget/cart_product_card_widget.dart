@@ -30,7 +30,7 @@ class CartProductCardWidget extends StatelessWidget {
               SizedBox(width: 15.0,),
               Text(
                 '${product.name}',
-                style: OswaldCustomStyle().style(context: context),
+                style: OswaldCustomStyle().style(context: context, fontSize: 14.0, fontWeight: FontWeight.w600),
                 textAlign: TextAlign.left,
               ),
             ],

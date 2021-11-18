@@ -12,11 +12,11 @@ class RobotoCustomStyle {
 }
 
 class OswaldCustomStyle {
-  style({required BuildContext context, Color? color}) {
+  style({required BuildContext context, Color? color, double? fontSize, FontWeight? fontWeight}) {
     return GoogleFonts.oswald(
       color: color ?? Theme.of(context).primaryColor,
-      fontSize: 12.0,
-      fontWeight: FontWeight.w300,
+      fontSize: fontSize ?? 12.0,
+      fontWeight: fontWeight ?? FontWeight.w300,
     );
   }
 }

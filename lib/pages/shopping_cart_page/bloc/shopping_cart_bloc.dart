@@ -6,6 +6,7 @@ import 'package:framework_test/helpers/string_helper.dart';
 import 'package:framework_test/model/product_model.dart';
 import 'package:framework_test/pages/shopping_cart_page/bloc/shopping_cart_events.dart';
 import 'package:framework_test/pages/shopping_cart_page/bloc/shopping_cart_state.dart';
+import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
@@ -81,8 +82,12 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
             ),
             pw.SizedBox(height: 35.0),
             pw.Row(
-              mainAxisAlignment: pw.MainAxisAlignment.end,
+              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
               children: [
+                pw.Text(
+                  DateFormat('dd/MM/yyyy kk:mm').format(DateTime.now()),
+                  style: pw.TextStyle(font: ttf, fontSize: 20),
+                ),
                 pw.Text(
                     'Total: R\$ ${convertCentsToReal(total)}',
                     style: pw.TextStyle(font: ttf, fontSize: 20),

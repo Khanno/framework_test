@@ -143,7 +143,7 @@ class ShoppingCartPage extends StatelessWidget {
                                       }
                                     },
                                     child: Text(
-                                      'Confirm',
+                                      'Checkout',
                                       style: OxygenCustomStyle().style(context: context, color: Theme.of(context).colorScheme.onSurface),
                                     ),
                                     style: ElevatedButtonStyle().style(context: context),

@@ -12,11 +12,11 @@ The main purpose was to meet the following requirements:
 
 ## Getting Started
 
-The project was build using Flutter 2.5.2 and Dart 2.14.3. So to run it, first assure you have these versions.
-Don't forget to run the following command in the terminal inside the project folder:
+This project was build using Flutter 2.5.2 and Dart 2.14.3. So to run it properly, first assure you have these versions installed.
+Don't forget to run the following command on the terminal inside the project folder:
 
 ```flutter pub get```
 
 After that you should be ready to run the app, or build an apk, ipa or bundle.
 
-The packages are using a stable version and will not update by themselves to prevent future bugs and features being broken because of said updates.
+The packages being used are in a stable version and will not update by themselves to prevent future bugs and features being broken because of said updates.

@@ -2,7 +2,7 @@ List<Map<String, dynamic>> data = [
   {
     'name': 'Apple Fuji',
     'value': 129,
-    'description': 'Fuji apples are typically round and range from large to very large, averaging 75 mm in diameter',
+    'description': 'Fuji apples are typically round and range from large to very large, averaging 75 mm in diameter.',
     'image': 'assets/images/apple_fuji.jpg',
   },
   {
@@ -74,7 +74,7 @@ List<Map<String, dynamic>> data = [
   {
     'name': 'Irwin Mango',
     'value': 450,
-    'description':  'The flesh is yellow and has a mild but sweet flavor and a pleasant aroma. It is fiberless and contains a monoembryonic seed',
+    'description':  'The flesh is yellow and has a mild but sweet flavor and a pleasant aroma. It is fiberless and contains a monoembryonic seed.',
     'image': 'assets/images/irwin_mango.jpg',
   }
 ];

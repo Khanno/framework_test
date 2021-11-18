@@ -1,7 +1,7 @@
 
 <p align='center'><img src='https://www.svgrepo.com/show/10154/shopping-cart-empty-side-view.svg'/></p>
 
-# MobiMarket - A Framework Interview Test
+# MobiMarket - Framework's Interview Test
 
 This is a flutter project made for a job interview. 
 The main purpose was to meet the following requirements:

@@ -4,9 +4,11 @@ import 'package:framework_test/model/product_model.dart';
 import 'package:framework_test/styles/text_styles.dart';
 
 class ProductCardWidget extends StatelessWidget {
-  final Product product;
 
-  ProductCardWidget({required this.product});
+  final Product product;
+  final Function() onPressed;
+
+  ProductCardWidget({required this.product, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +74,7 @@ class ProductCardWidget extends StatelessWidget {
                     child: CircleAvatar(
                       backgroundColor: Theme.of(context).colorScheme.onBackground,
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: onPressed,
                         icon: const Icon(Icons.add),
                         color: Theme.of(context).colorScheme.onPrimary,
                       ),

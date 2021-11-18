@@ -6,6 +6,18 @@ class HomePageState {
   String? message;
 
   HomePageState({this.listOfProducts, this.searchTerm, this.message});
+
+  HomePageState copyWith({
+    List<Product>? listOfProducts,
+    String? searchTerm,
+    String? message,
+  }) {
+    return HomePageState(
+      listOfProducts: listOfProducts ?? this.listOfProducts,
+      searchTerm: searchTerm ?? this.searchTerm,
+      message: message ?? this.message
+    );
+  }
 }
 
 class HomePageLoadingState extends HomePageState {}

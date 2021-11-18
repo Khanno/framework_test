@@ -12,6 +12,12 @@ class CustomTextInput extends StatelessWidget {
   final Color? labelColor;
   final Widget? suffixIcon;
   final Color? fillColor;
+  final Function(String)? onChanged;
+  final Color? borderColor;
+  final Color? focusBorderColor;
+  final Color? hintColor;
+  final Color? textInputColor;
+  final Color? cursorColor;
 
   CustomTextInput({
     this.label,
@@ -23,11 +29,18 @@ class CustomTextInput extends StatelessWidget {
     this.labelColor,
     this.suffixIcon,
     this.fillColor,
+    this.onChanged,
+    this.borderColor,
+    this.focusBorderColor,
+    this.hintColor,
+    this.textInputColor,
+    this.cursorColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       controller: controller,
       decoration: CustomTextInputDecoration().style(
         context: context,
@@ -36,11 +49,15 @@ class CustomTextInput extends StatelessWidget {
         labelColor: labelColor,
         suffixIcon: suffixIcon,
         fillColor: fillColor,
+        borderColor: borderColor,
+        focusBorderColor: focusBorderColor,
+        hintColor: hintColor,
       ),
+      cursorColor: cursorColor,
       keyboardType: keyboardType ?? TextInputType.name,
       textAlign: TextAlign.center,
       obscureText: isPassword,
-      style: RobotoCustomStyle().style(context: context),
+      style: RobotoCustomStyle().style(context: context, color: textInputColor),
       validator: (value) {
         if (isRequired) {
           if (value == null || value.isEmpty) {

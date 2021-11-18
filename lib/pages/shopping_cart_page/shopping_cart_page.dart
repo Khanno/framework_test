@@ -28,8 +28,7 @@ class ShoppingCartPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Shopping Cart',
-          style: OxygenCustomStyle().style(
-              context: context, color: Theme.of(context).colorScheme.onSurface),
+          style: OxygenCustomStyle().style(context: context, color: Theme.of(context).colorScheme.onSurface),
         ),
         centerTitle: true,
         leading: Padding(
@@ -56,48 +55,42 @@ class ShoppingCartPage extends StatelessWidget {
       body: SafeArea(
         child: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
             builder: (BuildContext context, ShoppingCartState state) {
-          switch (state.runtimeType) {
-            case CreatingPdfState:
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            case PdfCreatedState:
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Text(
-                      'Receipt created successfully!',
-                      style: OxygenCustomStyle().style(context: context),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  ElevatedButton(
-                      onPressed: () {
-                        context.read<ShoppingCartBloc>().add(ResetShoppingCart());
-                        Navigator.pop(context);
-                      },
-                      style: ElevatedButtonStyle().style(context: context),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Return to home page',
-                            style: OxygenCustomStyle()
-                                .style(context: context, color: Colors.white),
-                          ),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          Icon(
-                            Icons.keyboard_return,
-                            color: Colors.white,
-                          ),
-                        ],
-                      ))
+              switch (state.runtimeType) {
+                case CreatingPdfState:
+                  return Center(child: CircularProgressIndicator());
+                case PdfCreatedState:
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Text(
+                          'Receipt created successfully!',
+                          style: OxygenCustomStyle().style(context: context),
+                        ),
+                      ),
+                      SizedBox(height: 15.0),
+                      ElevatedButton(
+                        onPressed: () {
+                          context.read<ShoppingCartBloc>().add(ResetShoppingCart());
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButtonStyle().style(context: context),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Return to home page',
+                                style: OxygenCustomStyle().style(context: context, color: Colors.white),
+                              ),
+                              SizedBox(width: 15.0),
+                              Icon(
+                               Icons.keyboard_return,
+                               color: Colors.white,
+                              ),
+                            ],
+                        ),
+                      ),
                 ],
               );
             case ShoppingCartState:
@@ -115,11 +108,9 @@ class ShoppingCartPage extends StatelessWidget {
                           itemCount: state.shoppingCart!.length,
                           shrinkWrap: true,
                           itemBuilder: (BuildContext _, int index) =>
-                              CartProductCardWidget(
-                            product: state.shoppingCart![index],
-                            onPressed: () => context.read<ShoppingCartBloc>().add(
-                                RemoveItemFromShoppingCart(
-                                    product: state.shoppingCart![index])),
+                            CartProductCardWidget(
+                              product: state.shoppingCart![index],
+                              onPressed: () => context.read<ShoppingCartBloc>().add(RemoveItemFromShoppingCart(product: state.shoppingCart![index])),
                           ),
                         ) : Center(child: Text('Your shopping cart is empty :(', style: OxygenCustomStyle().style(context: context),),)
                       ),
@@ -136,9 +127,7 @@ class ShoppingCartPage extends StatelessWidget {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       if(state.shoppingCart != null && state.shoppingCart!.isNotEmpty) {
-                                        context
-                                            .read<ShoppingCartBloc>()
-                                            .add(CreateAndSavePdf());
+                                        context.read<ShoppingCartBloc>().add(CreateAndSavePdf());
                                       } else {
                                         final snackBar = SnackBar(
                                             content: Text(
@@ -155,14 +144,9 @@ class ShoppingCartPage extends StatelessWidget {
                                     },
                                     child: Text(
                                       'Confirm',
-                                      style: OxygenCustomStyle().style(
-                                          context: context,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSurface),
+                                      style: OxygenCustomStyle().style(context: context, color: Theme.of(context).colorScheme.onSurface),
                                     ),
-                                    style:
-                                        ElevatedButtonStyle().style(context: context),
+                                    style: ElevatedButtonStyle().style(context: context),
                                   ),
                                 ),
                                 SizedBox(width: 5.0,),
@@ -170,9 +154,7 @@ class ShoppingCartPage extends StatelessWidget {
                                   child: Text(
                                     'Total: R\$ ${convertCentsToReal(_totalValue(listOfProducts: state.shoppingCart!))}',
                                     textAlign: TextAlign.right,
-                                    style: OxygenCustomStyle().style(
-                                        context: context,
-                                        color: Theme.of(context).colorScheme.primary),
+                                    style: OxygenCustomStyle().style(context: context, color: Theme.of(context).colorScheme.primary),
                                   ),
                                 ),
                               ],
@@ -186,8 +168,9 @@ class ShoppingCartPage extends StatelessWidget {
               );
             default:
               return Text('Something went wrong.');
-          }
-        }),
+            }
+          },
+        ),
       ),
     );
   }

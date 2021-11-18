@@ -28,7 +28,15 @@ class CartProductCardWidget extends StatelessWidget {
                 ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
                     child: Container(
-                        width: 50, height: 50, child: Image.asset(product.image!, fit: BoxFit.fill,))),
+                        width: 50,
+                        height: 50,
+                        child:
+                        Image.asset(
+                          product.image!,
+                          fit: BoxFit.fill,
+                        ),
+                    ),
+                ),
                 SizedBox(width: 15.0,),
                 Expanded(
                   child: Text(
@@ -54,12 +62,12 @@ class CartProductCardWidget extends StatelessWidget {
                 width: 15.0,
               ),
               CircleAvatar(
-                  backgroundColor: Theme
-                      .of(context)
-                      .colorScheme
-                      .onBackground,
-                  child:
-                  IconButton(onPressed: onPressed, icon: Icon(Icons.remove))),
+                  backgroundColor: Theme.of(context).colorScheme.onBackground,
+                  child: IconButton(
+                      onPressed: onPressed,
+                      icon: Icon(Icons.remove),
+                  ),
+              ),
             ],
           ),
         ],

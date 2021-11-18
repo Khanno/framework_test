@@ -8,17 +8,14 @@ class ProductCardWidget extends StatelessWidget {
   final Function() onPressed;
   final Function() onTap;
 
-  ProductCardWidget(
-      {required this.product, required this.onPressed, required this.onTap});
+  ProductCardWidget({required this.product, required this.onPressed, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-
       margin: const EdgeInsets.only(bottom: 10.0, top: 10.0, left: 45, right: 45),
       decoration: BoxDecoration(
-          border: Border.all(
-              color: Theme.of(context).colorScheme.primary, width: 2.0),
+          border: Border.all(color: Theme.of(context).colorScheme.primary, width: 2.0),
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(15.0)),
       child: Padding(
@@ -37,9 +34,7 @@ class ProductCardWidget extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              width: 5.0,
-            ),
+            SizedBox(width: 5.0),
             Flexible(
               child: GestureDetector(
                 onTap: onTap,
@@ -77,8 +72,7 @@ class ProductCardWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: CircleAvatar(
-                      backgroundColor:
-                          Theme.of(context).colorScheme.onBackground,
+                      backgroundColor: Theme.of(context).colorScheme.onBackground,
                       child: IconButton(
                         onPressed: onPressed,
                         icon: const Icon(Icons.add),

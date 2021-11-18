@@ -26,5 +26,5 @@ class ErrorHomePageState extends HomePageState {
   final List<Product> listOfProducts;
   final String message;
 
-  ErrorHomePageState({required this.message, required this.listOfProducts}) : super(message: message, listOfProducts: listOfProducts);
+  ErrorHomePageState({required this.message, required this.listOfProducts,}) : super(message: message, listOfProducts: listOfProducts);
 }

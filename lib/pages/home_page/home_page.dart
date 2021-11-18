@@ -10,6 +10,7 @@ import 'package:framework_test/pages/shopping_cart_page/bloc/shopping_cart_bloc.
 import 'package:framework_test/pages/shopping_cart_page/bloc/shopping_cart_events.dart';
 import 'package:framework_test/pages/shopping_cart_page/bloc/shopping_cart_state.dart';
 import 'package:framework_test/pages/home_page/widgets/product_card_widget.dart';
+import 'package:framework_test/styles/text_styles.dart';
 import 'package:framework_test/widgets/text_inputs/custom_text_input.dart';
 
 class HomePage extends StatelessWidget {
@@ -63,10 +64,29 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.only(right: 8.0),
             child: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
                 builder: (BuildContext context, ShoppingCartState cartState) {
-              return IconButton(
-                onPressed: () => Navigator.pushNamed(context, '/shopping-cart'),
-                icon: Icon(Icons.shopping_cart),
-                color: Theme.of(context).colorScheme.onBackground,
+              return Stack(
+                children: [
+                  IconButton(
+                    onPressed: () =>
+                        Navigator.pushNamed(context, '/shopping-cart'),
+                    icon: Icon(Icons.shopping_cart),
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                  Visibility(
+                      visible: cartState.shoppingCart!.isNotEmpty,
+                      child: Positioned(
+                          top: 2,
+                          left: 25,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              color: Colors.red,
+                            ),
+                            width: 20,
+                            height: 20,
+                            child: Text('${cartState.shoppingCart!.length}', textAlign: TextAlign.center, style: RobotoCustomStyle().style(context: context),),
+                          ))),
+                ],
               );
             }),
           )

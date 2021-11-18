@@ -40,20 +40,36 @@ class ShoppingCartPage extends StatelessWidget {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
-              ListView.builder(
-                itemCount: state.shoppingCart!.length,
-                shrinkWrap: true,
-                itemBuilder: (BuildContext _, int index) =>
-                    CartProductCardWidget(
-                  product: state.shoppingCart![index],
-                  onPressed: () => context.read<ShoppingCartBloc>().add(
-                      RemoveItemFromShoppingCart(
-                          product: state.shoppingCart![index])),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: state.shoppingCart!.length,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext _, int index) =>
+                      CartProductCardWidget(
+                    product: state.shoppingCart![index],
+                    onPressed: () => context.read<ShoppingCartBloc>().add(
+                        RemoveItemFromShoppingCart(
+                            product: state.shoppingCart![index])),
+                  ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              Column(
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () => context.read<ShoppingCartBloc>().add(CreateAndSavePdf()),
+                        child: Text('Confirm Purchase', style: OxygenCustomStyle().style(context: context, color: Theme.of(context).colorScheme.onSurface),),
+                        style: ElevatedButtonStyle().style(context: context),
+                      ),
+                      Text(
+                        'Total: R\$ ${convertCentsToReal(_totalValue(listOfProducts: state.shoppingCart!))}',
+                        style: OxygenCustomStyle().style(
+                            context: context,
+                            color: Theme.of(context).colorScheme.primary),
+                      ),
+                    ],
                   ElevatedButton(
                     onPressed: () => context.read<ShoppingCartBloc>().add(CreateAndSavePdf()),
                     child: Text('Confirm Purchase', style: OxygenCustomStyle().style(context: context, color: Theme.of(context).colorScheme.onSurface),),

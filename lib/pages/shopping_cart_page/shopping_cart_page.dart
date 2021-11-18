@@ -70,16 +70,6 @@ class ShoppingCartPage extends StatelessWidget {
                             color: Theme.of(context).colorScheme.primary),
                       ),
                     ],
-                  ElevatedButton(
-                    onPressed: () => context.read<ShoppingCartBloc>().add(CreateAndSavePdf()),
-                    child: Text('Confirm Purchase', style: OxygenCustomStyle().style(context: context, color: Theme.of(context).colorScheme.onSurface),),
-                    style: ElevatedButtonStyle().style(context: context),
-                  ),
-                  Text(
-                    'Total: R\$ ${convertCentsToReal(_totalValue(listOfProducts: state.shoppingCart!))}',
-                    style: OxygenCustomStyle().style(
-                        context: context,
-                        color: Theme.of(context).colorScheme.primary),
                   ),
                 ],
               )

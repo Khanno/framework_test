@@ -5,7 +5,7 @@
 
 This is a flutter project made for a job interview. 
 The main purpose was to meet the following requirements:
-- Create a login system - You can log with any account that meet the requirements for the text input fields.
+- Create a login system - You can login with any account that meet the requirements for the text input fields.
 - The client will be able to search for products and choose what he wants to buy.
 - The app must have a shopping cart system, where it will be listed the products selected by the client.
 - The app must have a checkout button, that when pressed a pdf must be generated simulating a receipt.
